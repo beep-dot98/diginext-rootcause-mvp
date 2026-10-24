@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دستیار (Dastyar) | لینک هوشمند سفارش، حافظه مشتری و محافظ سود نامرئی - دیجینکست</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Design System Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#FBFBF9] text-[#18181B] min-h-screen flex flex-col font-sans selection:bg-[#F05A28] selection:text-white">
+
+  <!-- ================= TOP BRANDING & JUDGE FLOATING BAR ================= -->
+  <header class="border-b-[1.5px] border-[#18181B] bg-white sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Right: Diginext AI Solo Founder Logo & Challenge Stage -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-[#F05A28] border-[1.5px] border-[#18181B] rounded-lg shadow-[2px_2px_0px_#18181B] flex items-center justify-center font-extrabold text-white text-xl">
+          ▲
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base tracking-tight text-[#18181B]">AI SOLO FOUNDER</span>
+            <span class="bg-[#FFF3EE] text-[#F05A28] border border-[#F05A28] text-[11px] font-bold px-2 py-0.5 rounded">04 LVL</span>
+          </div>
+          <p class="text-xs text-[#52525B] font-medium">چالش ریشه‌یابی | مرحله سوم ارزیابی دیجینکست</p>
+        </div>
+      </div>
+
+      <!-- Center / Left: Tagline & Interactive Judge Scenario Button -->
+      <div class="flex items-center gap-3">
+        <div class="hidden md:block text-left text-xs text-[#52525B] pl-2 border-l border-zinc-200">
+          <span class="font-bold text-zinc-800">BUILD SOLO. GROW TOGETHER.</span>
+          <span class="block text-[11px]">شروع با تو، رشد با هم</span>
+        </div>
+
+        <button onclick="openJudgeScenariosModal()" class="nb-button-primary px-3.5 py-2 text-xs font-bold rounded-lg flex items-center gap-2 pulse-glow cursor-pointer">
+          <span class="text-base">🎯</span>
+          <span>سناریوی تست داوران (بارگذاری داده‌های واقعی پرونده)</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ================= STICKY 4-TAB NAVIGATION BAR ================= -->
+    <nav class="bg-[#FBFBF9] border-t border-zinc-200">
+      <div class="max-w-7xl mx-auto px-4 flex items-center overflow-x-auto no-scrollbar gap-1 text-xs md:text-sm font-bold">
+        
+        <button data-target="tab-order-link" class="nav-tab-btn active px-4 py-3 whitespace-nowrap flex items-center gap-2 cursor-pointer">
+          <span>🔗</span>
+          <span>۱. لینک کارت سفارش هوشمند (سمت مشتری)</span>
+        </button>
+
+        <button data-target="tab-seller-ops" class="nav-tab-btn px-4 py-3 whitespace-nowrap flex items-center gap-2 cursor-pointer">
+          <span>📱</span>
+          <span>۲. کارتابل عملیات و محافظ سود (سمت فروشنده)</span>
+        </button>
+
+        <button data-target="tab-fallback-scanner" class="nav-tab-btn px-4 py-3 whitespace-nowrap flex items-center gap-2 cursor-pointer">
+          <span>📮</span>
+          <span>۳. اسکنر رسید پستی و مبدل چت دایرکت</span>
+        </button>
+
+        <button data-target="tab-evidence-lab" class="nav-tab-btn px-4 py-3 whitespace-nowrap flex items-center gap-2 cursor-pointer">
+          <span>📊</span>
+          <span>۴. آزمایشگاه شواهد و کالبدشکافی مالی</span>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full space-y-8">
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 1: SMART ORDER LINK (CUSTOMER SIDE)                                -->
+    <!-- ========================================================================= -->
+    <section id="tab-order-link" class="app-tab-section space-y-6">
+      
+      <!-- Section Header with Diginext L-Shaped Corner Bracket Motif -->
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-300 pb-4">
+        <div>
+          <div class="bracket-box mb-1">
+            <h1 class="text-xl md:text-2xl font-black text-zinc-900">
+              لینک کارت سفارش هوشمند (سمت مشتری)
+            </h1>
+          </div>
+          <p class="text-xs md:text-sm text-zinc-600 font-medium">
+            شبیه‌ساز لینک بایو اینستاگرام و Quick Reply (<code class="bg-zinc-200 px-1 py-0.5 rounded font-mono text-zinc-800">order.app/seller</code>) — حل ریشه‌ای ۳.۴ ساعت اتلاف وقت شبانه در دایرکت
+          </p>
+        </div>
+
+        <!-- Persona Toggle Switcher -->
+        <div class="flex items-center gap-2 bg-zinc-200/80 p-1.5 rounded-xl border border-zinc-300 text-xs font-bold">
+          <span class="text-zinc-600 px-1.5">انتخاب پرسونای فروشنده:</span>
+          <button id="persona-btn-noora" onclick="switchPersona('noora')" class="px-3 py-1.5 rounded-lg bg-orange-600 text-white shadow-sm transition-all cursor-pointer">
+            🕯️ نورا کندل (@noora.candle - محصول ثابت)
+          </button>
+          <button id="persona-btn-rangamiz" onclick="switchPersona('rangamiz')" class="px-3 py-1.5 rounded-lg bg-white text-zinc-800 hover:bg-zinc-100 transition-all cursor-pointer">
+            🎨 رنگ‌آمیز و آستر (محصول سفارشی)
+          </button>
+        </div>
+      </div>
+
+      <!-- PERSONA 1: NOORA CANDLE (FIXED CATALOG & AUTO-CRM) -->
+      <div id="persona-view-noora" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left Column: Context & Explanations for Judges -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="nb-card p-5 space-y-3 bg-white">
+            <div class="flex items-center gap-2 text-orange-600 font-extrabold text-sm">
+              <span>💡</span>
+              <span>چرا این صفحه بحران پرونده نورا را حل می‌کند؟</span>
+            </div>
+            <p class="text-xs text-zinc-700 leading-relaxed">
+              در پرونده نورا کندل (<code class="font-mono">03_direct_messages.xlsx</code>)، مشتریانی مانند <strong>کتایون</strong> و <strong>کاوه</strong> بارها خرید کرده بودند اما نورا در هر سفارش دوباره آدرس، شماره و فیش می‌خواست! همچنین <strong>گرانی ۲۰٪ موم</strong> و دادن <strong>ارسال رایگان ۹۵ هزار تومانی</strong> روی شمع ۴۲۰ تومانی، نورا را به <strong>۸.۴۴ میلیون تومان ضرر خالص</strong> رساند.
+            </p>
+            
+            <div class="dashed-box p-3 space-y-2 text-xs">
+              <span class="font-bold text-zinc-800 block">⚡ تست سریع حافظه هوشمند مشتری (Auto-CRM):</span>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="fillCrmCustomer('katayoun')" class="nb-button text-[11px] py-1 px-2.5 bg-green-50 text-green-800 border-green-800">
+                  👤 مشتری قدیمی: کتایون (۰۹۱۲۱۱۱۱۱۱۱)
+                </button>
+                <button onclick="fillCrmCustomer('kaveh')" class="nb-button text-[11px] py-1 px-2.5 bg-blue-50 text-blue-800 border-blue-800">
+                  👤 مشتری قدیمی: کاوه (۰۹۱۲۲۲۲۲۲۲۲)
+                </button>
+                <button onclick="fillCrmCustomer(null)" class="nb-button text-[11px] py-1 px-2.5 bg-zinc-100 text-zinc-700">
+                  👤 مشتری جدید (فرم خالی)
+                </button>
+              </div>
+            </div>
+
+            <!-- Behind-The-Scenes Economics Indicator -->
+            <div class="border border-zinc-200 rounded-lg p-3 bg-zinc-50 text-xs space-y-1">
+              <span class="font-bold text-zinc-700 block">پایش زنده بهای تمام‌شده پشت‌صحنه:</span>
+              <div id="noora-margin-preview">
+                <span class="text-zinc-500">سبد خرید خالی است</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Tip Callout -->
+          <div class="dashed-box p-4 text-xs text-zinc-600 space-y-2">
+            <span class="font-bold text-zinc-900 block">🔍 راهنمای آزمایش داوران:</span>
+            <p class="leading-relaxed">
+              ۱. روی دکمه <strong>«کتایون»</strong> کلیک کنید تا شناسایی خودکار شماره و آدرس را ببینید.<br>
+              ۲. شمع بزرگ را انتخاب کنید و دکمه <strong>«آپلود فیش (OCR)»</strong> را بزنید.<br>
+              ۳. پس از ثبت، به تب ۲ بروید تا ببینید چگونه <strong>محافظ سود نامرئی</strong> زیان پنهان این سفارش را خنثی می‌کند.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Simulated Mobile Order Card -->
+        <div class="lg:col-span-7">
+          <div class="mobile-mockup-frame">
+            <div class="mobile-notch"></div>
+            
+            <!-- Mobile Header Bar -->
+            <div class="bg-white border-b border-zinc-200 p-4 text-center relative">
+              <span class="text-xs text-zinc-400 font-mono block">order.app/noora.candle</span>
+              <h2 class="font-extrabold text-base text-zinc-900 mt-1">🕯️ شمع دست‌ساز نورا (Noora Candle)</h2>
+              <p class="text-[11px] text-zinc-500">ثبت سریع سفارش بدون معطلی در دایرکت</p>
+            </div>
+
+            <div class="p-4 space-y-4 max-h-[75vh] overflow-y-auto">
+              
+              <!-- Auto-CRM Recognition Container -->
+              <div id="noora-crm-badge-container"></div>
+
+              <!-- 1-Click Repeat Order Button (Visible when Katayoun is recognized) -->
+              <button id="noora-quick-repeat-btn" onclick="repeatLastOrderKatayoun()" class="hidden w-full nb-button-primary py-2.5 px-3 text-xs font-bold rounded-lg flex items-center justify-center gap-2 animate-bounce">
+                <span>⚡</span>
+                <span>تکرار سفارش همیشگی (ست هدیه + شمع بزرگ یاس) بدون تایپ!</span>
+              </button>
+
+              <!-- Step 1: Customer Info -->
+              <div class="nb-card-sm p-3.5 space-y-3 bg-white">
+                <div class="flex items-center gap-2">
+                  <span class="step-number-badge">۱</span>
+                  <span class="font-bold text-xs text-zinc-900">مشخصات خریدار و نشانی تحویل:</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <label class="block text-zinc-600 mb-1 font-medium">شماره موبایل:</label>
+                    <input id="noora-cust-phone" type="tel" placeholder="۰۹۱۲xxxxxxx" class="w-full border border-zinc-300 rounded-lg p-2 font-mono text-left focus:border-orange-500 focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="block text-zinc-600 mb-1 font-medium">نام و نام خانوادگی:</label>
+                    <input id="noora-cust-name" type="text" placeholder="مثال: کتایون رادمهر" class="w-full border border-zinc-300 rounded-lg p-2 focus:border-orange-500 focus:outline-none">
+                  </div>
+                </div>
+
+                <div class="text-xs">
+                  <label class="block text-zinc-600 mb-1 font-medium">آدرس کامل پستی (به همراه کد پستی / پلاک):</label>
+                  <textarea id="noora-cust-address" rows="2" placeholder="استان، شهر، خیابان، پلاک، واحد..." class="w-full border border-zinc-300 rounded-lg p-2 focus:border-orange-500 focus:outline-none leading-relaxed"></textarea>
+                </div>
+              </div>
+
+              <!-- Step 2: Product Catalog from Real Noora Order Book -->
+              <div class="nb-card-sm p-3.5 space-y-3 bg-white">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="step-number-badge">۲</span>
+                    <span class="font-bold text-xs text-zinc-900">انتخاب شمع‌های کارگاهی:</span>
+                  </div>
+                  <div class="text-xs">
+                    <select id="noora-scent-select" class="border border-zinc-300 rounded px-2 py-1 text-xs">
+                      <option value="یاس فرانسوی">رایحه: یاس فرانسوی</option>
+                      <option value="دارچین و پرتقال">رایحه: دارچین و پرتقال</option>
+                      <option value="وانیل ماداگاسکار">رایحه: وانیل ماداگاسکار</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Catalog Items -->
+                <div class="space-y-2 text-xs">
+                  
+                  <!-- Item 1: Small Candle -->
+                  <div class="border border-zinc-200 p-2.5 rounded-lg flex items-center justify-between bg-zinc-50/50">
+                    <div>
+                      <strong class="text-zinc-900 block">شمع کوچک ۲۰۰ گرمی</strong>
+                      <span class="text-zinc-500 font-mono text-[11px]">۲۶۰,۰۰۰ تومان</span>
+                      <span class="text-[10px] text-zinc-400 block">(بهای تمام‌شده واقعی: ۲۵۴,۰۰۰ ت)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <input id="noora-qty-candle-small" type="number" min="0" value="0" onchange="calculateNooraTotal()" class="w-14 border border-zinc-300 rounded p-1 text-center font-bold">
+                    </div>
+                  </div>
+
+                  <!-- Item 2: Large Candle (Loss-Making!) -->
+                  <div class="border border-red-200 p-2.5 rounded-lg flex items-center justify-between bg-red-50/40">
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <strong class="text-zinc-900">شمع بزرگ ۴۰۰ گرمی</strong>
+                        <span class="bg-red-200 text-red-800 text-[10px] px-1.5 py-0.2 rounded font-bold">پرچالش پرونده</span>
+                      </div>
+                      <span class="text-zinc-700 font-mono text-[11px]">۴۲۰,۰۰۰ تومان</span>
+                      <span class="text-[10px] text-red-600 block font-medium">(بهای تمام‌شده با موم جدید: ۴۴۳,۰۰۰ ت — زیان‌ده!)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <input id="noora-qty-candle-large" type="number" min="0" value="0" onchange="calculateNooraTotal()" class="w-14 border border-zinc-300 rounded p-1 text-center font-bold">
+                    </div>
+                  </div>
+
+                  <!-- Item 3: Luxury Gift Set -->
+                  <div class="border border-zinc-200 p-2.5 rounded-lg flex items-center justify-between bg-zinc-50/50">
+                    <div>
+                      <strong class="text-zinc-900 block">ست هدیه دوتایی لوکس</strong>
+                      <span class="text-zinc-500 font-mono text-[11px]">۴۹۰,۰۰۰ تومان</span>
+                      <span class="text-[10px] text-zinc-400 block">(شامل جعبه هدیه و کبریت چوبی)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <input id="noora-qty-gift-set" type="number" min="0" value="0" onchange="calculateNooraTotal()" class="w-14 border border-zinc-300 rounded p-1 text-center font-bold">
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Free Shipping Checkbox Simulation -->
+                <div class="pt-2 border-t border-zinc-200 text-xs flex items-center justify-between">
+                  <label class="inline-flex items-center gap-2 cursor-pointer text-zinc-700">
+                    <input id="noora-free-ship-checkbox" type="checkbox" checked class="w-4 h-4 text-orange-600 rounded">
+                    <span>اعمال کد تخفیف / ارسال رایگان (هزینه پست ۹۵,۰۰۰ ت به عهده فروشنده)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Step 3: Payment & OCR Simulation -->
+              <div class="nb-card-sm p-3.5 space-y-3 bg-white">
+                <div class="flex items-center gap-2">
+                  <span class="step-number-badge">۳</span>
+                  <span class="font-bold text-xs text-zinc-900">پرداخت و بارگذاری فیش (Vision OCR):</span>
+                </div>
+
+                <div class="bg-zinc-100 p-3 rounded-lg text-xs space-y-1 text-zinc-800">
+                  <div class="flex justify-between">
+                    <span>مبلغ قابل پرداخت:</span>
+                    <strong id="noora-total-amount-display" class="text-sm font-bold text-orange-600 font-mono">۰ تومان</strong>
+                  </div>
+                  <div class="text-[11px] text-zinc-500">شماره کارت نورا کندل: <code class="font-mono text-zinc-700">۵۰۲۲-۲۹۱۰-۸۸۴۵-۱۲۰۹</code> (بانک ملت)</div>
+                </div>
+
+                <!-- OCR Simulator Button & Container -->
+                <button id="btn-upload-receipt" onclick="simulateReceiptUpload()" class="nb-button-primary w-full py-2.5 text-xs font-bold rounded-lg cursor-pointer">
+                  📸 آپلود عکس فیش واریزی (تست خودکار OCR)
+                </button>
+                <div id="receipt-simulation-container"></div>
+              </div>
+
+              <!-- Submit Button -->
+              <button onclick="submitNooraOrder()" class="nb-button-dark w-full py-3 text-sm font-black rounded-xl shadow-lg cursor-pointer">
+                🚀 ثبت نهایی سفارش و ارسال به کارتابل عملیات
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PERSONA 2: RANGAMIZ & ASTER (CUSTOM COMMISSIONS & REVISION CONTROL) -->
+      <div id="persona-view-rangamiz" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Dossier Analysis & Context -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="nb-card p-5 space-y-3 bg-white">
+            <div class="flex items-center gap-2 text-orange-600 font-extrabold text-sm">
+              <span>🎨</span>
+              <span>حل ریشه‌ای بحران کارهای سفارشی (رنگ‌آمیز و آستر)</span>
+            </div>
+            <p class="text-xs text-zinc-700 leading-relaxed">
+              بر اساس داده‌های <code class="font-mono">04_order_books.xlsx</code> و گفتگوهای <code class="font-mono">C003</code> و <code class="font-mono">C014</code>:
+              <strong>۴۷.۵٪ تاخیر در تحویل</strong> ناشی از ۳۰ پیام پینگ‌پنگ در دایرکت برای سایز بوم، عکس‌های بی‌کیفیت و تغییر رنگ بک‌گراند بود. همچنین رنگ‌آمیز روی هر قاب چوبی ۱۰۰ هزار تومان ضرر می‌داد و اصلاحیه‌های بی‌حدوحصر دستمزد ساعتی او را به <strong>۶۵,۹۰۱ تومان</strong> رسانده بود!
+            </p>
+
+            <div class="dashed-box p-3 space-y-2 text-xs">
+              <span class="font-bold text-zinc-800 block">🛡️ اهرم‌های کنترلی فرم هوشمند:</span>
+              <ul class="space-y-1.5 text-zinc-700 list-disc list-inside">
+                <li>الزام ۵۰٪ بیعانه قبل از شروع قلم‌زنی روی بوم</li>
+                <li>تثبیت پالت رنگ استاندارد (جلوگیری از ۳ بار تغییر رنگ)</li>
+                <li><strong>ارزیابی هوشمند کیفیت عکس</strong> با هوش مصنوعی (رد عکس‌های تار)</li>
+                <li>تعیین سقف ۲ بار اصلاحیه رایگان در قرارداد دیجیتال</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Quality Test Controller -->
+          <div class="dashed-box p-4 space-y-2 text-xs">
+            <span class="font-bold text-zinc-900 block">🧪 تست سناریوی داوری: سنجش کیفیت عکس با هوش مصنوعی</span>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="testRangamizImage('low')" class="nb-button text-[11px] py-1.5 px-3 bg-red-50 text-red-800 border-red-700">
+                🖼️ تست آپلود عکس بی‌کیفیت و تار
+              </button>
+              <button onclick="testRangamizImage('high')" class="nb-button text-[11px] py-1.5 px-3 bg-green-50 text-green-800 border-green-700">
+                ✨ تست آپلود عکس استاندارد و پرتره
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Mobile Custom Order Card -->
+        <div class="lg:col-span-7">
+          <div class="mobile-mockup-frame">
+            <div class="mobile-notch"></div>
+            
+            <div class="bg-white border-b border-zinc-200 p-4 text-center">
+              <span class="text-xs text-zinc-400 font-mono block">order.app/rangamiz.art</span>
+              <h2 class="font-extrabold text-base text-zinc-900 mt-1">🎨 استودیو نقاشی چهره رنگ‌آمیز</h2>
+              <p class="text-[11px] text-zinc-500">سفارش ساختاریافته تابلو رنگ‌روغن و پرتره اختصاصی</p>
+            </div>
+
+            <div class="p-4 space-y-4 max-h-[75vh] overflow-y-auto">
+              
+              <!-- Step 1: Customer Details -->
+              <div class="nb-card-sm p-3.5 space-y-2 bg-white text-xs">
+                <span class="font-bold text-zinc-900 block">۱. مشخصات متقاضی سفارش:</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <input id="rangamiz-cust-name" type="text" value="نیلوفر شایان" placeholder="نام و نام خانوادگی" class="border border-zinc-300 rounded p-2">
+                  <input id="rangamiz-cust-phone" type="tel" value="۰۹۳۵۴۴۴۳۳۲۲" placeholder="شماره موبایل" class="border border-zinc-300 rounded p-2 text-left font-mono">
+                </div>
+                <input id="rangamiz-cust-address" type="text" value="اصفهان، چهارباغ بالا، کوچه نگین، پلاک ۱۲" placeholder="آدرس پستی جهت ارسال با تیپاکس ضدضربه" class="w-full border border-zinc-300 rounded p-2">
+              </div>
+
+              <!-- Step 2: Canvas Size Selection -->
+              <div class="nb-card-sm p-3.5 space-y-2 bg-white text-xs">
+                <span class="font-bold text-zinc-900 block">۲. انتخاب ابعاد بوم نقاشی:</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <button type="button" onclick="setRangamizSize('۳۰×۴۰', 1400000, 1000000, this)" class="rangamiz-size-btn border border-zinc-300 p-2 rounded-lg text-center bg-white cursor-pointer hover:border-orange-500">
+                    <span class="font-bold block">۳۰×۴۰</span>
+                    <span class="text-[10px] text-zinc-500 font-mono">۱,۴۰۰,۰۰۰ ت</span>
+                  </button>
+                  <button type="button" onclick="setRangamizSize('۴۰×۵۰', 1800000, 1350000, this)" class="rangamiz-size-btn border-2 border-orange-600 bg-orange-50 text-orange-900 p-2 rounded-lg text-center cursor-pointer">
+                    <span class="font-bold block">۴۰×۵۰ (پرطرفدار)</span>
+                    <span class="text-[10px] font-mono">۱,۸۰۰,۰۰۰ ت</span>
+                  </button>
+                  <button type="button" onclick="setRangamizSize('۵۰×۷۰', 2600000, 1900000, this)" class="rangamiz-size-btn border border-zinc-300 p-2 rounded-lg text-center bg-white cursor-pointer hover:border-orange-500">
+                    <span class="font-bold block">۵۰×۷۰</span>
+                    <span class="text-[10px] text-zinc-500 font-mono">۲,۶۰۰,۰۰۰ ت</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 3: Frame & Curated Background Palette -->
+              <div class="nb-card-sm p-3.5 space-y-3 bg-white text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-zinc-900">۳. قاب چوبی و پالت رنگ پس‌زمینه:</span>
+                  <span class="text-[10px] text-orange-600 bg-orange-50 px-2 py-0.5 rounded border border-orange-200">حل زیان قاب در پرونده</span>
+                </div>
+
+                <div class="flex gap-2">
+                  <button id="frame-btn-with" type="button" onclick="toggleRangamizFrame(true)" class="flex-1 border-2 border-orange-600 bg-orange-50 text-orange-900 p-2 rounded-lg text-center font-bold">
+                    با قاب چوبی گردویی دست‌ساز (+۳۵۰,۰۰۰ ت)
+                  </button>
+                  <button id="frame-btn-without" type="button" onclick="toggleRangamizFrame(false)" class="flex-1 border border-zinc-300 p-2 rounded-lg text-center text-zinc-700 bg-white">
+                    بدون قاب (بوم ساده)
+                  </button>
+                </div>
+
+                <div>
+                  <label class="block text-zinc-600 mb-1">انتخاب هارمونی رنگ پس‌زمینه (جلوگیری از تغییر مکرر رنگ در دایرکت):</label>
+                  <select id="rangamiz-palette-select" class="w-full border border-zinc-300 rounded p-2 text-xs">
+                    <option value="نود کرم کلاسیک">پالت ۱: نود کرم کلاسیک و خنثی</option>
+                    <option value="سبز زیتونی ملایم">پالت ۲: سبز زیتونی و برگ بیدی</option>
+                    <option value="آبی درباری تیره">پالت ۳: آبی درباری و فیلی</option>
+                    <option value="خاکستری زغالی مدرن">پالت ۴: خاکستری زغالی مدرن</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Step 4: AI Image Quality Check -->
+              <div class="nb-card-sm p-3.5 space-y-2 bg-white text-xs">
+                <span class="font-bold text-zinc-900 block">۴. بارگذاری تصویر چهره با سنجش کیفیت هوش مصنوعی:</span>
+                <p class="text-[11px] text-zinc-500">الگوریتم رزولوشن و وضوح چشم‌ها را برای تضمین کیفیت نقاشی بررسی می‌کند.</p>
+                
+                <div id="rangamiz-image-ai-feedback">
+                  <div class="dashed-box p-3 text-center text-zinc-500">
+                    هنوز عکسی بارگذاری نشده است. برای آزمودن، دکمه‌های تستی سمت چپ را فشار دهید.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5: Rules & Deposit Checkbox -->
+              <div class="nb-card-sm p-3.5 space-y-3 bg-white text-xs">
+                <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-lg text-amber-900 leading-relaxed font-medium">
+                  ⚖️ <strong>قوانین شفاف سفارش:</strong> شروع قلم‌زنی منوط به پرداخت <strong>۵۰٪ بیعانه</strong> است. حداکثر <strong>۲ بار اصلاحیه جزئی رایگان</strong> قبل از خشک شدن رنگ مجاز می‌باشد (حل چالش ۴۵٪ اتلاف وقت در پرونده).
+                </div>
+
+                <label class="flex items-start gap-2 cursor-pointer text-zinc-800">
+                  <input id="rangamiz-rules-checkbox" type="checkbox" checked class="w-4 h-4 text-orange-600 rounded mt-0.5">
+                  <span class="leading-relaxed">شرایط فوق و پرداخت بیعانه را می‌پذیرم.</span>
+                </label>
+
+                <div class="bg-zinc-100 p-3 rounded-lg flex items-center justify-between">
+                  <div>
+                    <span class="text-zinc-500 block text-[11px]">مبلغ کل سفارش:</span>
+                    <strong id="rangamiz-total-price-display" class="text-zinc-900 font-mono text-sm">۲,۱۵۰,۰۰۰ تومان</strong>
+                  </div>
+                  <div class="text-left">
+                    <span class="text-zinc-500 block text-[11px]">مبلغ بیعانه شروع کار (۵۰٪):</span>
+                    <strong id="rangamiz-deposit-display" class="text-orange-600 font-mono text-sm">۱,۰۷۵,۰۰۰ تومان</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit Rangamiz Button -->
+              <button id="rangamiz-submit-btn" onclick="submitRangamizOrder()" class="nb-button-dark w-full py-3 text-sm font-black rounded-xl cursor-pointer">
+                🎨 تایید مشخصات و ثبت در کارتابل استودیو
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 2: SELLER OPERATIONS & UNIT ECONOMICS GUARD                        -->
+    <!-- ========================================================================= -->
+    <section id="tab-seller-ops" class="app-tab-section hidden space-y-6">
+      
+      <!-- View Header with L-Shaped Corner Bracket -->
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-300 pb-4">
+        <div>
+          <div class="bracket-box mb-1">
+            <h1 class="text-xl md:text-2xl font-black text-zinc-900">
+              کارتابل عملیات فروشنده و محافظ سود نامرئی
+            </h1>
+          </div>
+          <p class="text-xs md:text-sm text-zinc-600 font-medium">
+            جایگزین دفترچه کاغذی، اسکرین‌شات‌های گم‌شده و ورق زدن دایرکت در نیمه‌شب — پایان دادن به ۸.۴۴ میلیون تومان زیان خالص
+          </p>
+        </div>
+
+        <button onclick="openProductionListModal()" class="nb-button text-xs py-2 px-3.5 bg-white text-zinc-900 flex items-center gap-2 cursor-pointer">
+          <span>📋</span>
+          <span>خروجی یک‌کلیکی لیست تولید و بسته‌بندی فردا</span>
+        </button>
+      </div>
+
+      <!-- Real-Time Ops Counters Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="nb-card-sm p-3.5 bg-white flex items-center justify-between">
+          <div>
+            <span class="text-xs text-zinc-500 block">آماده برای بسته‌بندی:</span>
+            <span id="ops-count-ready" class="text-xl font-black text-green-700 font-mono">۴</span>
+          </div>
+          <span class="text-2xl">📦</span>
+        </div>
+
+        <div class="nb-card-sm p-3.5 bg-white flex items-center justify-between">
+          <div>
+            <span class="text-xs text-zinc-500 block">در انتظار بررسی فیش:</span>
+            <span id="ops-count-pending" class="text-xl font-black text-amber-600 font-mono">۱</span>
+          </div>
+          <span class="text-2xl">⏳</span>
+        </div>
+
+        <div class="nb-card-sm p-3.5 bg-white flex items-center justify-between">
+          <div>
+            <span class="text-xs text-zinc-500 block">ارسال شده با پست:</span>
+            <span id="ops-count-shipped" class="text-xl font-black text-blue-700 font-mono">۰</span>
+          </div>
+          <span class="text-2xl">🚚</span>
+        </div>
+
+        <div class="nb-card-sm p-3.5 bg-orange-50 border-orange-300 flex items-center justify-between">
+          <div>
+            <span class="text-[11px] text-orange-900 font-bold block">ساعت پایان کار امشب:</span>
+            <span class="text-xl font-black text-orange-600 font-mono">۲۰:۳۰</span>
+            <span class="text-[10px] text-zinc-600 block">کاهش ۳.۴ ساعت چت شبانه به ۲۰ دقیقه!</span>
+          </div>
+          <span class="text-2xl">🌙</span>
+        </div>
+      </div>
+
+      <!-- Orders List Container -->
+      <div class="space-y-4" id="seller-orders-list">
+        <!-- Injected via app.js: renderSellerOrders() -->
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 3: BATCH POSTAL SCANNER & FALLBACK MESSY DM PARSER                 -->
+    <!-- ========================================================================= -->
+    <section id="tab-fallback-scanner" class="app-tab-section hidden space-y-8">
+      
+      <!-- View Header with L-Shaped Corner Bracket -->
+      <div class="border-b border-zinc-300 pb-4">
+        <div class="bracket-box mb-1">
+          <h1 class="text-xl md:text-2xl font-black text-zinc-900">
+            اسکنر هوشمند رسید پستی و مبدل چت دایرکت (Vision OCR & Fallback Parser)
+          </h1>
+        </div>
+        <p class="text-xs md:text-sm text-zinc-600 font-medium">
+          حل دو گلوگاه اساسی پرونده: ارسال خودکار کد رهگیری جهت حذف ۲۳.۶٪ پیام‌های پیگیری، و استخراج خودکار سفارش از چت‌های بی‌نظم دایرکت
+        </p>
+      </div>
+
+      <!-- FEATURE 1: BATCH POSTAL SCANNER -->
+      <div class="nb-card p-6 bg-white space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="step-number-badge">۱</span>
+            <div>
+              <h2 class="font-extrabold text-base text-zinc-900">
+                اسکنر دسته‌جمعی بارکد پستی (حذف ۲۳.۶٪ پیام‌های «بسته‌م کجاست؟»)
+              </h2>
+              <p class="text-xs text-zinc-500">
+                فروشنده به جای تایپ ۲۴ رقم بارکد برای هر مشتری، عکس شیت اداره پست را یکجا بارگذاری می‌کند.
+              </p>
+            </div>
+          </div>
+
+          <button id="btn-batch-postal-scan" onclick="runBatchPostalScan()" class="nb-button-primary text-xs py-2.5 px-4 font-bold flex items-center gap-2 cursor-pointer">
+            <span>📷</span>
+            <span>آپلود عکس رسیدهای اداره پست (تست Vision OCR)</span>
+          </button>
+        </div>
+
+        <!-- Simulated Postal Receipt Sheet Preview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div class="border border-zinc-300 p-2.5 rounded bg-zinc-50 font-mono">
+            <span class="text-zinc-400 block text-[10px]">رسید ۱ (تهران)</span>
+            <strong>کتایون رادمهر</strong>
+            <div class="text-zinc-600 mt-1">۲۶۴۸۱۴۷۳۱۱۲۵۰۰۲۱</div>
+          </div>
+          <div class="border border-zinc-300 p-2.5 rounded bg-zinc-50 font-mono">
+            <span class="text-zinc-400 block text-[10px]">رسید ۲ (تهران)</span>
+            <strong>کاوه سپهری</strong>
+            <div class="text-zinc-600 mt-1">۲۶۴۸۳۸۹۲۵۷۹۳۰۰۱۸</div>
+          </div>
+          <div class="border border-zinc-300 p-2.5 rounded bg-zinc-50 font-mono">
+            <span class="text-zinc-400 block text-[10px]">رسید ۳ (شیراز)</span>
+            <strong>سپیده زمانی</strong>
+            <div class="text-zinc-600 mt-1">۲۶۴۸۹۹۱۰۴۵۱۲۰۰۳۴</div>
+          </div>
+          <div class="border border-zinc-300 p-2.5 rounded bg-zinc-50 font-mono">
+            <span class="text-zinc-400 block text-[10px]">رسید ۴ (اصفهان)</span>
+            <strong>نیلوفر شایان</strong>
+            <div class="text-zinc-600 mt-1">۲۶۴۸۷۶۲۱۰۸۳۴۰۰۵۶</div>
+          </div>
+        </div>
+
+        <div id="batch-scan-results"></div>
+      </div>
+
+      <!-- FEATURE 2: FALLBACK MESSY DM PARSER -->
+      <div class="nb-card p-6 bg-white space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="step-number-badge">۲</span>
+            <div>
+              <h2 class="font-extrabold text-base text-zinc-900">
+                مسیر پشتیبان (Fallback): مبدل متن آشفته دایرکت به سفارش استاندارد
+              </h2>
+              <p class="text-xs text-zinc-500">
+                برای مشتریانی که با لینک بایو راحت نیستند و هنوز در دایرکت پیام‌های طولانی و تکه‌تکه می‌فرستند!
+              </p>
+            </div>
+          </div>
+
+          <!-- Sample Selector Pills -->
+          <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+            <span class="text-zinc-500">نمونه‌های واقعی پرونده:</span>
+            <button onclick="loadMessyDmSample('c018')" class="nb-button text-[11px] py-1 px-2.5 bg-orange-50 text-orange-900 border-orange-400">
+              💬 گفتگوی C018 نورا (شمع و آدرس تکه‌تکه)
+            </button>
+            <button onclick="loadMessyDmSample('c005')" class="nb-button text-[11px] py-1 px-2.5 bg-zinc-100 text-zinc-800">
+              💬 گفتگوی C005 آستر (چت ۰۱:۴۵ بامداد)
+            </button>
+            <button onclick="loadMessyDmSample('c003')" class="nb-button text-[11px] py-1 px-2.5 bg-zinc-100 text-zinc-800">
+              💬 گفتگوی C003 رنگ‌آمیز (تغییر مکرر عکس)
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Left: Input Messy Chat -->
+          <div class="lg:col-span-6 space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span id="messy-dm-title-badge" class="font-bold text-zinc-800">
+                متن خام پیام‌های ارسالی مشتری در دایرکت:
+              </span>
+              <span class="text-zinc-400 font-mono text-[11px]">NLP & Structured Output</span>
+            </div>
+
+            <textarea id="messy-dm-textarea" rows="8" class="w-full border border-zinc-300 rounded-xl p-3 text-xs leading-relaxed font-sans focus:border-orange-500 focus:outline-none bg-zinc-50" placeholder="پیام‌های دایرکت مشتری را اینجا پیست کنید..."></textarea>
+
+            <button id="btn-parse-dm" onclick="parseMessyDmWithAi()" class="nb-button-primary w-full py-2.5 text-xs font-bold rounded-lg cursor-pointer flex items-center justify-center gap-2">
+              <span>✨</span>
+              <span>استخراج خودکار سفارش با هوش مصنوعی (AI Order Parser)</span>
+            </button>
+          </div>
+
+          <!-- Right: Output Card -->
+          <div class="lg:col-span-6">
+            <div id="parsed-dm-result-box" class="dashed-box p-6 text-center text-xs text-zinc-400 min-h-[220px] flex items-center justify-center">
+              برای مشاهده خروجی، یکی از گفتگوهای پرونده را انتخاب و دکمه استخراج را بزنید.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 4: EVIDENCE & ROOT CAUSE LAB                                       -->
+    <!-- ========================================================================= -->
+    <section id="tab-evidence-lab" class="app-tab-section hidden space-y-8">
+      
+      <!-- View Header with L-Shaped Corner Bracket -->
+      <div class="border-b border-zinc-300 pb-4">
+        <div class="bracket-box mb-1">
+          <h1 class="text-xl md:text-2xl font-black text-zinc-900">
+            آزمایشگاه شواهد و کالبدشکافی مالی پرونده‌ها (Root Cause Evidence Lab)
+          </h1>
+        </div>
+        <p class="text-xs md:text-sm text-zinc-600 font-medium">
+          تحلیل عمیق ۵ فایل پرونده دیجینکست: مقایسه توهم ذهنی فروشندگان در برابر داده‌های تجربی دفاتر سفارش و گفتگوها
+        </p>
+      </div>
+
+      <!-- SECTION 1: STATED PERCEPTION VS EMPIRICAL REALITY -->
+      <div class="nb-card p-6 bg-white space-y-4">
+        <div class="bracket-box mb-2">
+          <h2 class="text-base md:text-lg font-black text-zinc-900">
+            ۱. تضاد اساسی: «آنچه فروشندگان فکر می‌کنند» در برابر «واقعیت داده‌ها»
+          </h2>
+        </div>
+        <p class="text-xs text-zinc-600 leading-relaxed">
+          در پرسشنامه اولیه (<code class="font-mono">01_survey_responses.xlsx</code>)، بنیان‌گذاران سولو ادعا می‌کردند بزرگترین دغدغه‌شان الگوریتم اینستاگرام و تولید محتواست، اما دفاتر سفارش و دایرکت‌ها نشان داد که بحران واقعی در <strong>فروپاشی چرخه عملیات و اقتصاد واحد محصول</strong> است:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          
+          <!-- Stated in Survey -->
+          <div class="border border-zinc-300 rounded-xl p-4 bg-zinc-50 space-y-3">
+            <div class="flex items-center justify-between border-b border-zinc-200 pb-2">
+              <span class="font-bold text-xs text-zinc-800">ادعای پرسشنامه (Survey Stated)</span>
+              <span class="text-[11px] bg-zinc-200 text-zinc-700 px-2 py-0.5 rounded font-bold">۰۱_survey_responses</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>تولید محتوا، الگوریتم و جذب فالوور:</span>
+                  <strong class="font-mono text-zinc-900">۵۷٪</strong>
+                </div>
+                <div class="w-full bg-zinc-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-zinc-700 h-full" style="width: 57%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>کمبود سرمایه و فروش:</span>
+                  <strong class="font-mono text-zinc-900">۲۱٪</strong>
+                </div>
+                <div class="w-full bg-zinc-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-zinc-700 h-full" style="width: 21%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>مدیریت سفارش، انبار و دایرکت:</span>
+                  <strong class="font-mono text-orange-600 font-bold">تنها ۶.۵٪!</strong>
+                </div>
+                <div class="w-full bg-zinc-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-orange-600 h-full" style="width: 6.5%"></div>
+                </div>
+              </div>
+            </div>
+            <p class="text-[11px] text-zinc-500 italic mt-2">
+              * فروشندگان درد واقعی را در ویترین می‌دیدند، نه در انبار و حسابداری پشت‌صحنه!
+            </p>
+          </div>
+
+          <!-- Empirical Reality in Data -->
+          <div class="border-2 border-orange-500 rounded-xl p-4 bg-orange-50/40 space-y-3">
+            <div class="flex items-center justify-between border-b border-orange-200 pb-2">
+              <span class="font-bold text-xs text-orange-950">واقعیت داده‌های عینی (Empirical Reality)</span>
+              <span class="text-[11px] bg-orange-200 text-orange-900 px-2 py-0.5 rounded font-bold">03_direct & 04_order_books</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>پاسخگویی فرساینده در نیمه‌شب (۲۲ تا ۴ صبح):</span>
+                  <strong class="font-mono text-red-700 font-bold">۱۰۰٪ فروشندگان!</strong>
+                </div>
+                <div class="w-full bg-orange-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-red-600 h-full" style="width: 100%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>فاقد هرگونه حافظه مشتری یا دیتابیس قبلی:</span>
+                  <strong class="font-mono text-red-700 font-bold">۸۳٪</strong>
+                </div>
+                <div class="w-full bg-orange-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-red-600 h-full" style="width: 83%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span>سفارش‌های با حاشیه سود منفی یا زیان پنهان:</span>
+                  <strong class="font-mono text-red-700 font-bold">۵۴٪ سفارش‌ها</strong>
+                </div>
+                <div class="w-full bg-orange-200 h-2 rounded-full overflow-hidden">
+                  <div class="bg-red-600 h-full" style="width: 54%"></div>
+                </div>
+              </div>
+            </div>
+            <p class="text-[11px] text-orange-900 font-bold mt-2">
+              * محصول Dastyar دقیقاً این ۵۴٪ گلوگاه نامرئی و بحران‌ساز را هدف قرار داده است.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 2: FINANCIAL AUTOPSY OF THE 3 BUSINESSES -->
+      <div class="nb-card p-6 bg-white space-y-6">
+        <div class="bracket-box mb-2">
+          <h2 class="text-base md:text-lg font-black text-zinc-900">
+            ۲. کالبدشکافی مالی ۳ دفتر سفارش واقعی (04_order_books.xlsx)
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          
+          <!-- Card 1: Noora Candle -->
+          <div class="border border-red-300 rounded-xl p-4 bg-red-50/50 space-y-3">
+            <div class="flex items-center justify-between border-b border-red-200 pb-2">
+              <span class="font-extrabold text-xs text-red-900">🕯️ نورا کندل (@noora.candle)</span>
+              <span class="bg-red-700 text-white text-[10px] px-2 py-0.5 rounded font-bold">زیان خالص!</span>
+            </div>
+            <div class="space-y-1.5 text-xs text-zinc-800">
+              <div class="flex justify-between"><span>تعداد سفارش‌ها:</span><strong class="font-mono">۱۹۷ سفارش</strong></div>
+              <div class="flex justify-between"><span>فروش اسمی کل:</span><strong class="font-mono">۱۰۶.۲۶ میلیون ت</strong></div>
+              <div class="flex justify-between"><span>هزینه تمام‌شده واقعی:</span><strong class="font-mono text-red-700">۱۱۴.۷۰ میلیون ت</strong></div>
+              <div class="flex justify-between border-t border-red-200 pt-1 text-red-900 font-extrabold">
+                <span>تراز مالی نهایی:</span>
+                <span class="font-mono">۸.۴۴- میلیون ت (زیان)</span>
+              </div>
+              <div class="text-[11px] text-zinc-600 mt-2">
+                + ۱۶.۷۷ میلیون تومان سفارش بلاتکلیف به علت عدم وصول فیش‌های دایرکت!
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Sepidar Soap -->
+          <div class="border border-green-300 rounded-xl p-4 bg-green-50/50 space-y-3">
+            <div class="flex items-center justify-between border-b border-green-200 pb-2">
+              <span class="font-extrabold text-xs text-green-900">🧼 سپیدار صابون (@sepidar.soap)</span>
+              <span class="bg-green-700 text-white text-[10px] px-2 py-0.5 rounded font-bold">سودآور اما معلق</span>
+            </div>
+            <div class="space-y-1.5 text-xs text-zinc-800">
+              <div class="flex justify-between"><span>تعداد سفارش‌ها:</span><strong class="font-mono">۱۵۱ سفارش</strong></div>
+              <div class="flex justify-between"><span>فروش کل:</span><strong class="font-mono">۴۹.۷۹ میلیون ت</strong></div>
+              <div class="flex justify-between"><span>سود اسمی ناخالص:</span><strong class="font-mono text-green-800">۱۹.۹۷ میلیون ت</strong></div>
+              <div class="flex justify-between border-t border-green-200 pt-1 text-amber-900 font-extrabold">
+                <span>سرمایه در گرو فیش‌ها:</span>
+                <span class="font-mono">۶.۱۳ میلیون ت بلاتکلیف</span>
+              </div>
+              <div class="text-[11px] text-zinc-600 mt-2">
+                سفارش‌هایی که در دایرکت پیام داده شده اما به دلیل پیگیری دستی گم شدند!
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Rangamiz Studio -->
+          <div class="border border-blue-300 rounded-xl p-4 bg-blue-50/50 space-y-3">
+            <div class="flex items-center justify-between border-b border-blue-200 pb-2">
+              <span class="font-extrabold text-xs text-blue-900">🎨 استودیو رنگ‌آمیز (@rangamiz.art)</span>
+              <span class="bg-blue-700 text-white text-[10px] px-2 py-0.5 rounded font-bold">فرسودگی شدید</span>
+            </div>
+            <div class="space-y-1.5 text-xs text-zinc-800">
+              <div class="flex justify-between"><span>سفارش‌های سفارشی:</span><strong class="font-mono">۴۰ سفارش</strong></div>
+              <div class="flex justify-between"><span>ساعت کار کل:</span><strong class="font-mono">۶۴۲ ساعت</strong></div>
+              <div class="flex justify-between"><span>دستمزد ساعتی واقعی:</span><strong class="font-mono text-blue-900">۶۵,۹۰۱ تومان!</strong></div>
+              <div class="flex justify-between border-t border-blue-200 pt-1 text-red-800 font-extrabold">
+                <span>ضرر روی قاب‌ها:</span>
+                <span class="font-mono">۱۰۰ هزار ت روی هر سفارش</span>
+              </div>
+              <div class="text-[11px] text-zinc-600 mt-2">
+                ۴۷.۵٪ تاخیر در تحویل به دلیل عکس‌های تار و تغییر رنگ‌های سه‌باره در چت!
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Profit & Loss Simulator for Judges -->
+        <div class="dashed-box p-4 space-y-3 text-xs bg-white">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-200 pb-2">
+            <span class="font-bold text-zinc-900 text-sm">
+              🧮 شبیه‌ساز اثر محافظ سود هوشمند (تست تعاملی داوران)
+            </span>
+            <span class="text-zinc-500 text-[11px]">دفتر سفارش نورا کندل</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <label class="flex items-center gap-2 cursor-pointer bg-zinc-50 p-2 rounded border border-zinc-200">
+              <input id="sim-wax-hike" type="checkbox" checked onchange="updateNooraSimulator()" class="w-4 h-4 text-orange-600 rounded">
+              <span>گرانی ۲۰٪ موم اردیبهشت ماه (+۱۰.۵ م ت هزینه)</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer bg-zinc-50 p-2 rounded border border-zinc-200">
+              <input id="sim-free-ship" type="checkbox" checked onchange="updateNooraSimulator()" class="w-4 h-4 text-orange-600 rounded">
+              <span>ارسال رایگان بدون کف سفارش (+۸.۲ م ت هزینه)</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer bg-zinc-50 p-2 rounded border border-zinc-200">
+              <input id="sim-friend-discount" type="checkbox" checked onchange="updateNooraSimulator()" class="w-4 h-4 text-orange-600 rounded">
+              <span>تخفیف‌های رفاقتی دایرکت (-۵.۸ م ت درآمد)</span>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between bg-zinc-100 p-3 rounded-lg mt-2">
+            <div>
+              <span class="text-zinc-500 block text-[11px]">سود / زیان نهایی محاسبه‌شده:</span>
+              <span id="sim-net-result-display" class="text-xl font-extrabold text-red-600 font-mono">-۸,۴۴۰,۰۰۰ تومان</span>
+            </div>
+            <div id="sim-net-badge" class="px-2.5 py-1 rounded text-xs font-bold bg-red-100 text-red-800">
+              زیان خالص عمیق (وضعیت پرونده واقعی: ۸.۴۴- میلیون ت)
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SECTION 3: ROOT CAUSE TO MVP FEATURE MAPPING -->
+      <div class="nb-card p-6 bg-white space-y-4">
+        <div class="bracket-box mb-2">
+          <h2 class="text-base md:text-lg font-black text-zinc-900">
+            ۳. ماتریس ریشه‌یابی و نگاشت راه‌حل محصول Dastyar
+          </h2>
+        </div>
+
+        <div class="border border-zinc-300 rounded-lg overflow-x-auto text-xs">
+          <table class="w-full text-right divide-y divide-zinc-200">
+            <thead class="bg-zinc-100 font-bold text-zinc-900">
+              <tr>
+                <th class="p-3">چالش کشف‌شده در پرونده</th>
+                <th class="p-3">منبع در مستندات</th>
+                <th class="p-3">راه‌حل توسعه‌یافته در Dastyar MVP</th>
+                <th class="p-3 text-center">اثر کمی و کیفی</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-200 text-zinc-800">
+              <tr class="hover:bg-zinc-50">
+                <td class="p-3 font-bold">• اتلاف ۳.۴ ساعت شبانه در دایرکت برای آدرس و سفارش</td>
+                <td class="p-3 font-mono text-zinc-500">03_direct & C016</td>
+                <td class="p-3">لینک کارت سفارش بایو با حافظه خودکار مشتری (Auto-CRM)</td>
+                <td class="p-3 text-center font-bold text-green-700">کاهش ۹۰٪ زمان چت</td>
+              </tr>
+              <tr class="hover:bg-zinc-50">
+                <td class="p-3 font-bold">• زیان پنهان ۸.۴۴ میلیون تومانی ناشی از تورم و ارسال رایگان</td>
+                <td class="p-3 font-mono text-zinc-500">04_order_books</td>
+                <td class="p-3">محافظ سود نامرئی (Unit Economics Guardrail) روی کارت هر سفارش</td>
+                <td class="p-3 text-center font-bold text-green-700">حذف ۱۰۰٪ سفارش‌های زیان‌ده</td>
+              </tr>
+              <tr class="hover:bg-zinc-50">
+                <td class="p-3 font-bold">• ۲۳.۶٪ پیام‌های تکراری «کد رهگیری پست من کو؟»</td>
+                <td class="p-3 font-mono text-zinc-500">03_direct</td>
+                <td class="p-3">اسکنر دسته بارکدهای پستی با هوش مصنوعی و ارسال پیامک آنی</td>
+                <td class="p-3 text-center font-bold text-green-700">صفر شدن دایرکت‌های پیگیری</td>
+              </tr>
+              <tr class="hover:bg-zinc-50">
+                <td class="p-3 font-bold">• ۴۷.۵٪ تاخیر تحویل نقاشی به خاطر عکس تار و تغییر قاب</td>
+                <td class="p-3 font-mono text-zinc-500">04_order_books & C003</td>
+                <td class="p-3">سنجش خودکار کیفیت عکس + فرم ساختاریافته سایز و بیعانه</td>
+                <td class="p-3 text-center font-bold text-green-700">دستمزد ساعتی ۲.۴ برابری</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t-[1.5px] border-zinc-900 bg-white py-6 mt-12 text-xs text-zinc-600">
+    <div class="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-orange-600 rounded-full inline-block"></span>
+        <strong class="text-zinc-900">دستیار (Dastyar)</strong> — توسعه‌یافته برای سومین مرحله ارزیابی کمپ هوش مصنوعی دیجینکست (AI Solo Founder Camp)
+      </div>
+      <div class="text-left font-mono text-[11px] text-zinc-500">
+        Standalone Static Single-Page App | 100% GitHub Pages Ready
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= JUDGE TEST TOUR MODAL ================= -->
+  <div id="judge-scenarios-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="nb-card max-w-xl w-full p-6 bg-white space-y-4 max-h-[90vh] overflow-y-auto animate-fade-in">
+      
+      <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎯</span>
+          <h3 class="font-extrabold text-base text-zinc-900">سناریوهای آزمون ویژه داوران دیجینکست</h3>
+        </div>
+        <button onclick="closeJudgeScenariosModal()" class="text-zinc-500 hover:text-zinc-800 text-lg font-bold">✕</button>
+      </div>
+
+      <p class="text-xs text-zinc-600 leading-relaxed">
+        برای ارزیابی سریع و ملموس، یکی از سناریوهای زیر را انتخاب فرمایید. هر سناریو دقیقا یکی از گره‌های کور ۵ فایل پرونده را شبیه‌سازی می‌کند:
+      </p>
+
+      <div class="space-y-2.5 text-xs">
+        
+        <!-- Scenario 1 -->
+        <button onclick="runJudgeScenario('scenario-katayoun')" class="w-full text-right p-3 rounded-xl border border-zinc-300 hover:border-orange-500 hover:bg-orange-50/50 transition-all flex items-start justify-between gap-2 cursor-pointer">
+          <div>
+            <strong class="text-zinc-900 block font-bold text-sm">۱. خرید کتایون از نورا کندل (Auto-CRM و هشدار زیان)</strong>
+            <span class="text-zinc-600 block mt-0.5">شناسایی خودکار شماره ۰۹۱۲۱۱۱۱۱۱۱ از گفتگوی C016، بارگذاری آدرس و تست شمع ۴۲۰ هزار تومانی زیان‌ده.</span>
+          </div>
+          <span class="bg-orange-100 text-orange-900 px-2 py-1 rounded text-[11px] font-bold whitespace-nowrap">اجرای سناریو →</span>
+        </button>
+
+        <!-- Scenario 2 -->
+        <button onclick="runJudgeScenario('scenario-rangamiz')" class="w-full text-right p-3 rounded-xl border border-zinc-300 hover:border-orange-500 hover:bg-orange-50/50 transition-all flex items-start justify-between gap-2 cursor-pointer">
+          <div>
+            <strong class="text-zinc-900 block font-bold text-sm">۲. بوم سفارشی رنگ‌آمیز (رد عکس تار و مهار اصلاحیه)</strong>
+            <span class="text-zinc-600 block mt-0.5">حل چالش گفتگوی C003 و تاخیر ۴۷.۵٪ با رد هوشمند عکس بی‌کیفیت و الزام ۵۰٪ بیعانه.</span>
+          </div>
+          <span class="bg-orange-100 text-orange-900 px-2 py-1 rounded text-[11px] font-bold whitespace-nowrap">اجرای سناریو →</span>
+        </button>
+
+        <!-- Scenario 3 -->
+        <button onclick="runJudgeScenario('scenario-unit-economics')" class="w-full text-right p-3 rounded-xl border border-zinc-300 hover:border-orange-500 hover:bg-orange-50/50 transition-all flex items-start justify-between gap-2 cursor-pointer">
+          <div>
+            <strong class="text-zinc-900 block font-bold text-sm">۳. پایش محافظ سود نامرئی در کارتابل عملیات</strong>
+            <span class="text-zinc-600 block mt-0.5">مشاهده هشدارهای قرمز محاسبه بهای تمام‌شده و پیشنهادهای اصلاح قیمت به فروشنده.</span>
+          </div>
+          <span class="bg-orange-100 text-orange-900 px-2 py-1 rounded text-[11px] font-bold whitespace-nowrap">اجرای سناریو →</span>
+        </button>
+
+        <!-- Scenario 4 -->
+        <button onclick="runJudgeScenario('scenario-batch-scan')" class="w-full text-right p-3 rounded-xl border border-zinc-300 hover:border-orange-500 hover:bg-orange-50/50 transition-all flex items-start justify-between gap-2 cursor-pointer">
+          <div>
+            <strong class="text-zinc-900 block font-bold text-sm">۴. اسکن دسته‌جمعی بارکد پست و پیامک خودکار</strong>
+            <span class="text-zinc-600 block mt-0.5">اسکن ۴ رسید پستی همزمان با هوش مصنوعی و صفر کردن ۲۳.۶٪ پیام‌های پیگیری.</span>
+          </div>
+          <span class="bg-orange-100 text-orange-900 px-2 py-1 rounded text-[11px] font-bold whitespace-nowrap">اجرای سناریو →</span>
+        </button>
+
+        <!-- Scenario 5 -->
+        <button onclick="runJudgeScenario('scenario-dm-parser')" class="w-full text-right p-3 rounded-xl border border-zinc-300 hover:border-orange-500 hover:bg-orange-50/50 transition-all flex items-start justify-between gap-2 cursor-pointer">
+          <div>
+            <strong class="text-zinc-900 block font-bold text-sm">۵. تبدیل متن آشفته دایرکت C018 به سفارش تمیز با AI</strong>
+            <span class="text-zinc-600 block mt-0.5">استخراج ساختاریافته نام، محصولات و آدرس از پیام‌های تکه‌تکه دایرکت.</span>
+          </div>
+          <span class="bg-orange-100 text-orange-900 px-2 py-1 rounded text-[11px] font-bold whitespace-nowrap">اجرای سناریو →</span>
+        </button>
+
+      </div>
+
+      <div class="border-t border-zinc-200 pt-3 flex justify-between items-center text-xs">
+        <button onclick="runJudgeScenario('scenario-reset')" class="text-zinc-600 hover:text-red-600 underline">
+          ↺ بازنشانی کلیه داده‌ها به حالت اولیه داوری
+        </button>
+        <button onclick="closeJudgeScenariosModal()" class="nb-button py-1.5 px-4 bg-zinc-200 text-zinc-800">
+          بستن پنجره
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= PRODUCTION LIST MODAL ================= -->
+  <div id="production-list-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="nb-card max-w-lg w-full p-6 bg-white space-y-4 max-h-[90vh] overflow-y-auto animate-fade-in">
+      <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📋</span>
+          <h3 class="font-extrabold text-base text-zinc-900">لیست تجمیعی تولید و کارگاه فردا صبح</h3>
+        </div>
+        <button onclick="closeProductionListModal()" class="text-zinc-500 hover:text-zinc-800 text-lg font-bold">✕</button>
+      </div>
+      <div id="production-list-content"></div>
+      <div class="border-t border-zinc-200 pt-3 flex justify-end">
+        <button onclick="closeProductionListModal()" class="nb-button-primary text-xs py-2 px-4">
+          متوجه شدم (بستن)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SHIPPING LABEL MODAL ================= -->
+  <div id="shipping-label-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="nb-card max-w-lg w-full p-6 bg-white space-y-4 max-h-[90vh] overflow-y-auto animate-fade-in">
+      <div class="flex items-center justify-between border-b border-zinc-200 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🖨️</span>
+          <h3 class="font-extrabold text-base text-zinc-900">برچسب استاندارد مرسوله پستی</h3>
+        </div>
+        <button onclick="closeShippingLabelModal()" class="text-zinc-500 hover:text-zinc-800 text-lg font-bold">✕</button>
+      </div>
+      <div id="shipping-label-content"></div>
+      <div class="border-t border-zinc-200 pt-3 flex justify-between">
+        <button onclick="window.print()" class="nb-button text-xs py-2 px-4 bg-zinc-100">
+          چاپ مستقیم (Print)
+        </button>
+        <button onclick="closeShippingLabelModal()" class="nb-button-dark text-xs py-2 px-4">
+          بستن
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div id="toast-container"></div>
+
+  <!-- ================= MAIN JS LOGIC ================= -->
+  <script src="app.js"></script>
+</body>
+</html>
